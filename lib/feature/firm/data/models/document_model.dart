@@ -77,12 +77,16 @@ class DocumentModel extends DocumentEntity {
         idPeriod: json["ID_Period"],
         countOfId: json["CountOfID"] == null
             ? null
-            : num.tryParse(json["CountOfID"]) as int?,
-        year: json["Year"] == null ? null : num.tryParse(json["Year"]) as int?,
-        type: json["Type"] == null ? null : num.tryParse(json["Type"]) as int?,
+            : num.tryParse(json["CountOfID"].toString()) as int?,
+        year: json["Year"] == null
+            ? null
+            : num.tryParse(json["Year"].toString()) as int?,
+        type: json["Type"] == null
+            ? null
+            : num.tryParse(json["Type"].toString()) as int?,
         subType: json["SubType"] == null
             ? null
-            : num.tryParse(json["SubType"]) as int?,
+            : num.tryParse(json["SubType"].toString()) as int?,
         start: json["Start"] == null ? null : DateTime.parse(json["Start"]),
         end: json["End"] == null ? null : DateTime.parse(json["End"]),
         idOld: json["ID_Old"],

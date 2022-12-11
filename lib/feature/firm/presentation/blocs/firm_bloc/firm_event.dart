@@ -8,3 +8,19 @@ abstract class FirmEvent extends Equatable {
 }
 
 class GetAllFirmsEvent extends FirmEvent {}
+
+class ChangeSelectFirmByIdEvent extends FirmEvent {
+  final List<FirmSelected> selectedFirms;
+  final int id;
+
+  const ChangeSelectFirmByIdEvent({
+    required this.id,
+    required this.selectedFirms,
+  });
+
+  @override
+  List<Object> get props => [
+        id,
+        selectedFirms,
+      ];
+}

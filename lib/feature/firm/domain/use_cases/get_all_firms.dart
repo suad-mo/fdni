@@ -13,7 +13,7 @@ class GetAllFirmsUseCase implements UseCase<List<FirmEntity>, NoParams> {
 
   @override
   Future<Either<Failure, List<FirmEntity>>> call(NoParams params) async {
-    print('aaaaa...');
+    // print('aaaaa...');
     final firms = await _repository.getAllFirms();
     return firms;
   }

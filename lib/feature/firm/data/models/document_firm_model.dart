@@ -81,21 +81,22 @@ class DocumentFirmModel extends DocumentFirmEntity {
   factory DocumentFirmModel.fromJson(Map<String, dynamic> json) =>
       DocumentFirmModel(
         idDocument: json["ID_Document"] ?? 'NoIdDocument',
-        idFirm: json["ID_Firm"] ?? -1,
-        nvo: json["NVO"] == null ? null : num.tryParse(json["NVO"]) as double?,
-        ta: json["TA"] == null ? null : num.tryParse(json["TA"]) as double?,
-        usluge: json["Usluge"] == null
-            ? null
-            : num.tryParse(json["Usluge"]) as double?,
+        idFirm: json["ID_Firm"] == null ? 0 : (json["ID_Firm"] as num).toInt(),
+        nvo: json["NVO"] == null ? null : (json["NVO"] as num).toDouble(),
+        ta: json["TA"] == null ? null : (json["TA"] as num).toDouble(),
+        usluge:
+            json["Usluge"] == null ? null : (json["Usluge"] as num).toDouble(),
         aktOznaka: json["AktOznaka"],
         aktDatum:
             json["AktDatum"] == null ? null : DateTime.parse(json["AktDatum"]),
         dopuna: json["Dopuna"],
-        id: json["ID"],
-        finished: json["Finished"],
-        ukupno: json["Ukupno"] == null
-            ? null
-            : num.tryParse(json["Ukupno"]) as double?,
+        id: json["ID"] == null
+            ? 0
+            : num.tryParse(json["ID"].toString()) as int?,
+        finished:
+            json["Finished"] == null ? 0 : (json["Finished"] as num).toInt(),
+        ukupno:
+            json["Ukupno"] == null ? null : (json["Ukupno"] as num).toDouble(),
         idPeriod: json["ID_Period"],
         napomena: json["Napomena"],
       );

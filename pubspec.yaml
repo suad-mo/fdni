@@ -40,6 +40,9 @@ dependencies:
   dartz: ^0.10.1
   flutter_bloc: ^8.1.1
   get_it: ^7.2.0
+  intl: ^0.17.0
+  syncfusion_flutter_charts: ^20.3.59
+  syncfusion_flutter_datagrid: ^20.3.60
 
 dev_dependencies:
   flutter_test:
@@ -67,7 +70,10 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
+  assets:
+    - lib/core/input_data/data_documents_firms.json
+    - lib/core/input_data/data_documents.json
+    - lib/core/input_data/data_firms.json
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

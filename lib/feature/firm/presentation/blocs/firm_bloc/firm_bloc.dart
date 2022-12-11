@@ -1,9 +1,13 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:fdni/core/use_cases/use_cases.dart';
-import 'package:fdni/feature/firm/domain/use_cases/get_all_firms.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../../../core/use_cases/use_cases.dart';
+import '../../../domain/use_cases/get_all_firms.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:flutter/cupertino.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../domain/entities/firm_entity.dart';
@@ -22,6 +26,7 @@ class FirmBloc extends Bloc<FirmEvent, FirmState> {
   })  : _getAllFirmsUseCase = getAllFirmsUseCase,
         super(FirmInitialState()) {
     on<GetAllFirmsEvent>(_getAllFirmsEventHandler);
+    on<ChangeSelectFirmByIdEvent>(_changeSelectFirmByIdEventHandler);
   }
 
   Future<void> _getAllFirmsEventHandler(
@@ -37,7 +42,10 @@ class FirmBloc extends Bloc<FirmEvent, FirmState> {
         ),
       );
     }, (firms) {
-      emit(FirmLoadedState(firms: firms));
+      final selectFirms = firms
+          .map((e) => FirmSelected(idFirm: e.idFirm, name: e.name))
+          .toList();
+      emit(FirmLoadedState(selectFirms: selectFirms, firms: firms));
     });
   }
 
@@ -59,5 +67,47 @@ class FirmBloc extends Bloc<FirmEvent, FirmState> {
     }
 
     return failureMessage;
+  }
+
+  Future<void> _changeSelectFirmByIdEventHandler(
+      ChangeSelectFirmByIdEvent event, Emitter<FirmState> emit) async {
+    if (state is FirmLoadedState) {
+      final id = event.id;
+      final firms = event.selectedFirms;
+      try {
+        emit(FirmChangeSelectedFirmsState(id: id, selectFirms: firms));
+        final selectFirms = firms.map((e) {
+          if (id != e.idFirm) {
+            return e;
+          } else {
+            e.changeSelected();
+            return e;
+          }
+        }).toList();
+
+        emit(FirmLoadedState(selectFirms: selectFirms));
+      } catch (e) {
+        emit(
+          const FirmRetrievalErrorState(
+            message: 'Error ...',
+          ),
+        );
+      }
+    }
+  }
+}
+
+// ignore: must_be_immutable
+class FirmSelected extends FirmEntity {
+  bool selected;
+
+  FirmSelected({
+    required super.idFirm,
+    required super.name,
+    this.selected = false,
+  });
+
+  void changeSelected() {
+    selected = !selected;
   }
 }
