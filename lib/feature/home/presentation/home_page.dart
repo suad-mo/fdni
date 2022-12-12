@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   buildPages() {
     switch (index) {
       case 0:
-        return const DocumentsPage();
+        return DocumentsPage();
       case 1:
         return const FirmsPage();
       case 2:

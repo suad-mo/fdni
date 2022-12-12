@@ -6,8 +6,9 @@ abstract class DocumentState extends Equatable {
   const DocumentState({
     this.documents = const <DocumentEntity>[],
   });
-  Map<int, Map<DocumentSubType, DocumentType>> get existingYearTypDocument =>
+  Map<int, Map<DocumentSubType, DocumentType>> get existingYearTypeDocument =>
       {};
+  Map<int, Map<DocumentType, DocumentSubType>> get existingDocuments => {};
   @override
   List<Object> get props => [documents];
 }
@@ -25,7 +26,7 @@ class DocumentLoadedState extends DocumentState {
   List<Object> get props => [documents];
 
   @override
-  Map<int, Map<DocumentSubType, DocumentType>> get existingYearTypDocument {
+  Map<int, Map<DocumentSubType, DocumentType>> get existingYearTypeDocument {
     Map<int, Map<DocumentSubType, DocumentType>> data = {};
 
     // Map<int, Map<DocumentType,DocumentSubType>> data = {};
@@ -53,6 +54,39 @@ class DocumentLoadedState extends DocumentState {
                 DocumentType.getWithId(e.type),
           }
         };
+      }
+    }
+    return data;
+  }
+
+  @override
+  Map<int, Map<DocumentType, DocumentSubType>> get existingDocuments {
+    Map<int, Map<DocumentType, DocumentSubType>> data = {};
+    for (var e in documents) {
+      // print(e);
+      final year = e.year ?? 0;
+      final type = DocumentType.getWithId(e.type);
+      final subType = DocumentSubType.getWithId(e.subType);
+      if (data.containsKey(year)) {
+        Map<DocumentType, DocumentSubType> w;
+        w = data[year]!;
+        if (w.containsKey(type)) {
+          // w.addAll(w);
+          w.putIfAbsent(type, () => subType);
+        } else {
+          w.addAll({
+            type: subType,
+          });
+        }
+        // data.addAll({year: w});
+        data.putIfAbsent(year, () => w);
+      } else {
+        data.addAll({
+          year: {
+            type: subType,
+          }
+        });
+        // data.putIfAbsent(year, () => {type: subType});
       }
     }
     return data;
