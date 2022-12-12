@@ -19,7 +19,7 @@ class FirmsPage extends StatelessWidget {
           elevation: 0,
           // leading: Icon(Icons.bar_chart),
         ),
-        body: Container(
+        body: SizedBox(
           width: double.infinity,
           child: ListView.builder(
               // controller: ScrollController(),

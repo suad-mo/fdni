@@ -272,90 +272,86 @@ class _MyHomePageState extends State<MyHomePage> {
         } else {
           return Scaffold(
             appBar: AppBar(title: const Text('Back')),
-            body: Container(
-              // color: Colors.blue,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Row(
-                  children: [
-                    const Text(
-                      'Period',
-                      style:
-                          TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
-                    ),
-                    const Expanded(child: SizedBox()),
-                    DropdownButton<String>(
-                      value: _year,
-                      items: <String>[
-                        '2022',
-                        '2021',
-                        '2020',
-                        '2016',
-                        '2015',
-                        '2014',
-                        '2013',
-                        '2012'
-                      ].map<DropdownMenuItem<String>>((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (String? newValue) {
-                        if (newValue != _year) {
-                          setState(() {
-                            _year = newValue!;
-                          });
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    DropdownButton<int>(
-                      // Step 3.
-                      value: _period,
-                      // Step 4.
-                      items: <int>[1, 2, 3, 4]
-                          .map<DropdownMenuItem<int>>((int value) {
-                        String str = '';
-                        switch (value) {
-                          case 1:
-                            str = 'I kvartal';
-                            break;
-                          case 2:
-                            str = 'II kvartal';
-                            break;
-                          case 3:
-                            str = 'III kvartal';
-                            break;
-                          case 4:
-                            str = 'IV kvartal';
-                            break;
-                          default:
-                        }
-                        return DropdownMenuItem<int>(
-                          value: value,
-                          child: Text(
-                            str,
-                            style: const TextStyle(fontSize: 20),
-                          ),
-                        );
-                      }).toList(),
-                      // Step 5.
-                      onChanged: (int? newValue) {
-                        if (newValue != _period) {
-                          setState(() {
-                            _period = newValue!;
-                          });
-                        }
-                      },
-                    ),
-                  ],
-                ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: Row(
+                children: [
+                  const Text(
+                    'Period',
+                    style: TextStyle(fontSize: 20, fontStyle: FontStyle.italic),
+                  ),
+                  const Expanded(child: SizedBox()),
+                  DropdownButton<String>(
+                    value: _year,
+                    items: <String>[
+                      '2022',
+                      '2021',
+                      '2020',
+                      '2016',
+                      '2015',
+                      '2014',
+                      '2013',
+                      '2012'
+                    ].map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      if (newValue != _year) {
+                        setState(() {
+                          _year = newValue!;
+                        });
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  DropdownButton<int>(
+                    // Step 3.
+                    value: _period,
+                    // Step 4.
+                    items: <int>[1, 2, 3, 4]
+                        .map<DropdownMenuItem<int>>((int value) {
+                      String str = '';
+                      switch (value) {
+                        case 1:
+                          str = 'I kvartal';
+                          break;
+                        case 2:
+                          str = 'II kvartal';
+                          break;
+                        case 3:
+                          str = 'III kvartal';
+                          break;
+                        case 4:
+                          str = 'IV kvartal';
+                          break;
+                        default:
+                      }
+                      return DropdownMenuItem<int>(
+                        value: value,
+                        child: Text(
+                          str,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      );
+                    }).toList(),
+                    // Step 5.
+                    onChanged: (int? newValue) {
+                      if (newValue != _period) {
+                        setState(() {
+                          _period = newValue!;
+                        });
+                      }
+                    },
+                  ),
+                ],
               ),
             ),
           );

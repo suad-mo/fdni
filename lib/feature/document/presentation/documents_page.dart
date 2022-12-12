@@ -21,7 +21,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
   int currentYear = 2022;
   DocumentType currentType = DocumentType.plan;
   DocumentSubType currentSubType = DocumentSubType.quarter3;
-  late Map<int, Map<DocumentType, DocumentSubType>> list;
+  late Map<int, Map<DocumentType, List<DocumentSubType>>> list;
 
   final ButtonStyle _offStyle = ElevatedButton.styleFrom(
     foregroundColor: Colors.black87, backgroundColor: Colors.grey[300],
@@ -86,7 +86,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 40,
                   child: ListView.builder(
@@ -99,8 +99,6 @@ class _DocumentsPageState extends State<DocumentsPage> {
                                   ? _onStyle
                                   : _offStyle,
                               onPressed: (() {
-                                final x = currentYear == years[index];
-
                                 setState(() {
                                   currentYear = years[index];
                                 });
@@ -109,7 +107,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
                         )),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 40,
                   child: ListView.builder(
@@ -136,7 +134,7 @@ class _DocumentsPageState extends State<DocumentsPage> {
                 ),
 
                 if (currentType == DocumentType.raport)
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     height: 40,
                     child: ListView.builder(
@@ -168,29 +166,65 @@ class _DocumentsPageState extends State<DocumentsPage> {
                   ),
                 ...list.entries.map<Widget>(
                   (e) {
-                    DocumentType curType;
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text('${e.key.toString()} ${e.value.toString()}'),
-                        ...e.value.entries.map((x) {
-                          return Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
+                    return Card(
+                      // shape: ShapeBorder(BoxShape.circle,
+                      color: Colors.amber,
+                      margin: const EdgeInsets.all(8),
+
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Row(
+                              children: [
+                                Text(
+                                  e.key.toString(),
+                                  style: const TextStyle(fontSize: 18),
                                 ),
-                                child: Column(
-                                  children: [
-                                    Text(x.key.id.toString()),
-                                    Text(x.value.name),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          );
-                        }).toList()
-                      ],
+                                const Expanded(child: SizedBox()),
+                                IconButton(
+                                    iconSize: 16,
+                                    onPressed: (() {}),
+                                    icon: const Icon(
+                                      Icons.arrow_forward,
+                                      size: 16,
+                                    ))
+                              ],
+                            ),
+                          ),
+                          ...e.value.entries.map((x) {
+                            return Column(
+                              children: [
+                                Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20),
+                                    child: Text(x.key.translation)),
+                                Container(
+                                    alignment: Alignment.centerLeft,
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 30,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        ...x.value.reversed.map(
+                                          (p) => InkWell(
+                                              onTap: (() {
+                                                final str =
+                                                    '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
+                                                print(str);
+                                              }),
+                                              child: Text(p.translation)),
+                                        ),
+                                      ],
+                                    )),
+                              ],
+                            );
+                          }).toList(),
+                        ],
+                      ),
                     );
                   },
                 ).toList()

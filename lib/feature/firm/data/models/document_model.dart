@@ -84,8 +84,9 @@ class DocumentModel extends DocumentEntity {
         type: json["Type"] == null
             ? null
             : num.tryParse(json["Type"].toString()) as int?,
-        subType: json["SubType"] == null
-            ? null
+        subType: json["SubType"] == null &&
+                (num.tryParse(json["Type"].toString()) as int?) == 0
+            ? 0
             : num.tryParse(json["SubType"].toString()) as int?,
         start: json["Start"] == null ? null : DateTime.parse(json["Start"]),
         end: json["End"] == null ? null : DateTime.parse(json["End"]),

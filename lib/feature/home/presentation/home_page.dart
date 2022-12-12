@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
       );
 
   buildBottomBar() {
-    const style = TextStyle(color: Colors.white);
+    // const style = TextStyle(color: Colors.white);
     return BottomNavigationBar(
       backgroundColor: Theme.of(context).primaryColorDark,
       selectedItemColor: Colors.white70,
@@ -46,7 +46,7 @@ class _HomePageState extends State<HomePage> {
   buildPages() {
     switch (index) {
       case 0:
-        return DocumentsPage();
+        return const DocumentsPage();
       case 1:
         return const FirmsPage();
       case 2:
