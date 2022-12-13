@@ -10,6 +10,8 @@ abstract class DocumentState extends Equatable {
       {};
   Map<int, Map<DocumentType, List<DocumentSubType>>> get existingDocuments =>
       {};
+
+  Map<int, List<DocumentSubType>> get existingReports => {};
   @override
   List<Object> get props => [documents];
 }
@@ -89,6 +91,31 @@ class DocumentLoadedState extends DocumentState {
             type: [subType],
           },
         );
+      }
+    }
+    return data;
+  }
+
+  @override
+  Map<int, List<DocumentSubType>> get existingReports {
+    Map<int, List<DocumentSubType>> data = {};
+    for (var e in documents) {
+      final year = e.year ?? 0;
+      final type = DocumentType.getWithId(e.type);
+      final subType = DocumentSubType.getWithId(e.subType);
+      if (type == DocumentType.raport) {
+        if (data.containsKey(year)) {
+          List<DocumentSubType> w = data[year] ?? [];
+          if (!w.contains(subType)) {
+            w.add(subType);
+          }
+          data.putIfAbsent(year, () => w);
+        } else {
+          data.putIfAbsent(
+            year,
+            () => [subType],
+          );
+        }
       }
     }
     return data;

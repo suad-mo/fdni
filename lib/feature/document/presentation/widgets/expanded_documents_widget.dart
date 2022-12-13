@@ -62,31 +62,12 @@ class _ExpandedDocumentsWidgetState extends State<ExpandedDocumentsWidget> {
               headerBuilder: ((context, isExpanded) {
                 return ListTile(
                   title: Text(e.key.toString()),
-                  // enableFeedback: false,
-                  trailing: IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: (() {}),
-                  ),
-                  contentPadding: EdgeInsets.symmetric(horizontal: 50),
-                  // selected: true,
-                  // selectedColor: Colors.amber,
-                  leading: IconButton(
-                    icon: Icon(
-                        isExpanded ? Icons.expand_less : Icons.expand_more),
-                    onPressed: () {
-                      setState(() {
-                        _isYearEx[_yrs.indexOf(year)] = !isExpanded;
-                      });
-                    },
-                  ),
-                  // isThreeLine: false,
-                  // subtitle: Text('Subtitle'),
-                  horizontalTitleGap: 0,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 8),
                 );
               }),
               isExpanded: _isYearEx[_yrs.indexOf(e.key)],
               body: Container(
-                margin: EdgeInsets.only(left: 40),
+                margin: const EdgeInsets.only(left: 20),
                 child: ExpansionPanelList(
                   expandedHeaderPadding:
                       const EdgeInsets.symmetric(horizontal: 26),
