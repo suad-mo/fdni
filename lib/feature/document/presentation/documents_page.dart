@@ -1,4 +1,5 @@
 import 'package:fdni/core/enums/document_type.dart';
+import 'package:fdni/feature/document/presentation/widgets/expanded_documents_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -164,72 +165,8 @@ class _DocumentsPageState extends State<DocumentsPage> {
                             )),
                     ),
                   ),
-                ...list.entries.map<Widget>(
-                  (e) {
-                    return Card(
-                      // shape: ShapeBorder(BoxShape.circle,
-                      color: Colors.amber,
-                      margin: const EdgeInsets.all(8),
-
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: Row(
-                              children: [
-                                Text(
-                                  e.key.toString(),
-                                  style: const TextStyle(fontSize: 18),
-                                ),
-                                const Expanded(child: SizedBox()),
-                                IconButton(
-                                    iconSize: 16,
-                                    onPressed: (() {}),
-                                    icon: const Icon(
-                                      Icons.arrow_forward,
-                                      size: 16,
-                                    ))
-                              ],
-                            ),
-                          ),
-                          ...e.value.entries.map((x) {
-                            return Column(
-                              children: [
-                                Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20),
-                                    child: Text(x.key.translation)),
-                                Container(
-                                    alignment: Alignment.centerLeft,
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 30,
-                                    ),
-                                    child: Column(
-                                      children: [
-                                        ...x.value.reversed.map(
-                                          (p) => InkWell(
-                                              onTap: (() {
-                                                final str =
-                                                    '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
-                                                print(str);
-                                              }),
-                                              child: Text(p.translation)),
-                                        ),
-                                      ],
-                                    )),
-                              ],
-                            );
-                          }).toList(),
-                        ],
-                      ),
-                    );
-                  },
-                ).toList()
-
-                //Text(': ')
+                // ...listCartWidget,
+                ExpandedDocumentsWidget(list: list),
               ],
             ),
           ),
@@ -237,4 +174,132 @@ class _DocumentsPageState extends State<DocumentsPage> {
       },
     );
   }
+
+  List<Widget> get listCartWidget => list.entries.map<Widget>(
+        (e) {
+          return Card(
+            // shape: ShapeBorder(BoxShape.circle,
+            color: Colors.blue,
+            margin: const EdgeInsets.all(8),
+
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        e.key.toString(),
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const Expanded(child: SizedBox()),
+                      IconButton(
+                          iconSize: 16,
+                          onPressed: (() {}),
+                          icon: const Icon(
+                            Icons.arrow_forward,
+                            size: 16,
+                          ))
+                    ],
+                  ),
+                ),
+                ...e.value.entries.map((x) {
+                  return Column(
+                    children: [
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(x.key.translation)),
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                          ),
+                          child: Column(
+                            children: [
+                              ...x.value.reversed.map(
+                                (p) => InkWell(
+                                    onTap: (() {
+                                      final str =
+                                          '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
+                                      print(str);
+                                    }),
+                                    child: Text(p.translation)),
+                              ),
+                            ],
+                          )),
+                    ],
+                  );
+                }).toList(),
+              ],
+            ),
+          );
+        },
+      ).toList();
+
+  List<Widget> get listExpandedPanelWidgets => list.entries.map<Widget>(
+        (e) {
+          return Card(
+            // shape: ShapeBorder(BoxShape.circle,
+            color: Colors.blue,
+            margin: const EdgeInsets.all(8),
+
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        e.key.toString(),
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const Expanded(child: SizedBox()),
+                      IconButton(
+                          iconSize: 16,
+                          onPressed: (() {}),
+                          icon: const Icon(
+                            Icons.arrow_forward,
+                            size: 16,
+                          ))
+                    ],
+                  ),
+                ),
+                ...e.value.entries.map((x) {
+                  return Column(
+                    children: [
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.symmetric(horizontal: 20),
+                          child: Text(x.key.translation)),
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                          ),
+                          child: Column(
+                            children: [
+                              ...x.value.reversed.map(
+                                (p) => InkWell(
+                                    onTap: (() {
+                                      final str =
+                                          '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
+                                      print(str);
+                                    }),
+                                    child: Text(p.translation)),
+                              ),
+                            ],
+                          )),
+                    ],
+                  );
+                }).toList(),
+              ],
+            ),
+          );
+        },
+      ).toList();
 }
