@@ -24,7 +24,7 @@ class _ExpandedReportsWidgetState extends State<ExpandedReportsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final list = getIt.get<DocumentBloc>().state.existingReports;
+    var list = getIt.get<DocumentBloc>().state.existingReports;
 
     return ExpansionPanelList(
       dividerColor: Colors.amber,
@@ -50,22 +50,22 @@ class _ExpandedReportsWidgetState extends State<ExpandedReportsWidget> {
             }),
             isExpanded: _isYearEx[_yrs.indexOf(e.key)],
             body: Container(
-                margin: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    ...subTypes.reversed.map((e) => BlocProvider(
-                          lazy: false,
-                          create: ((context)
-                              // => DocumentFirmBloc()
-                              {
-                            return getIt.get<DocumentFirmBloc>()
-                              ..add(GetDocumentFirmByIdEvent(
-                                  id: '$year-1-${e.id}'));
-                          }),
-                          child: PieYearDocumentSubType(),
-                        ))
-                  ],
-                )),
+              margin: const EdgeInsets.all(10),
+              child: Column(
+                children: [
+                  ...subTypes.reversed.map(
+                    (s) {
+                      final id = '$year-1-${s.id}';
+
+                      return PieYearDocumentSubType(
+                        id: id,
+                        chartTitle: s.translation,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
           );
         }).toList(),
       ],

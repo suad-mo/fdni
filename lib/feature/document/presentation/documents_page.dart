@@ -1,5 +1,4 @@
 import 'package:fdni/core/enums/document_type.dart';
-import 'package:fdni/feature/document/presentation/widgets/expanded_documents_widget.dart';
 import 'package:fdni/feature/document/presentation/widgets/expanded_reports_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

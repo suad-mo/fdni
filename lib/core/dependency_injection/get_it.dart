@@ -28,7 +28,7 @@ class AppGetIt {
         DocumentBloc(getAllDocumentsUseCase: getIt<GetAllDocumentsUseCase>())
           ..add(const GetAllDocumentsEvent()));
 
-    getIt.registerLazySingleton(() => DocumentFirmBloc(
+    getIt.registerFactory(() => DocumentFirmBloc(
           getDocumentsFirmsByIdUseCase: getIt<GetDocumentsFirmsByIdUseCase>(),
           getDocumentByIdUseCase: getIt<GetDocumentByIdUseCase>(),
         ));
