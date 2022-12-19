@@ -13,11 +13,11 @@ class ExpandedDocumentsWidget extends StatefulWidget {
 }
 
 class _ExpandedDocumentsWidgetState extends State<ExpandedDocumentsWidget> {
-  List<bool> _isYearEx = [];
-  List<int> _yrs = [];
+  final List<bool> _isYearEx = [];
+  final List<int> _yrs = [];
 
-  List<bool> _isTypeEx = [];
-  List<DocumentType> _types = [];
+  final List<bool> _isTypeEx = [];
+  final List<DocumentType> _types = [];
 
   // @override
   // void initState() {

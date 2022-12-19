@@ -1,8 +1,10 @@
 import 'package:fdni/feature/firm/data/data_sources/local_data_source/documents_local_data_source_impl.dart';
 import 'package:fdni/feature/firm/data/repositories/document_repository_impl.dart';
 import 'package:fdni/feature/firm/domain/repositories/document_repository.dart';
+import 'package:fdni/feature/firm/domain/use_cases/get_all_documents_firms.dart';
 import 'package:fdni/feature/firm/domain/use_cases/get_documents_firms_by_id.dart';
 import 'package:fdni/feature/firm/domain/use_cases/get_firm_all_documents_by_id.dart';
+import 'package:fdni/feature/firm/presentation/blocs/all_data_bloc/all_data_bloc.dart';
 import 'package:fdni/feature/firm/presentation/blocs/firm_all_documents_bloc/firm_all_documents_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -28,7 +30,13 @@ class AppGetIt {
         DocumentBloc(getAllDocumentsUseCase: getIt<GetAllDocumentsUseCase>())
           ..add(const GetAllDocumentsEvent()));
 
-    getIt.registerFactory(() => DocumentFirmBloc(
+    getIt.registerLazySingleton(() => AllDataBloc(
+          getAllDocumentsFirmsUseCase: getIt<GetAllDocumentsFirmsUseCase>(),
+          getAllDocumentsUseCase: getIt<GetAllDocumentsUseCase>(),
+          getAllFirmsUseCase: getIt<GetAllFirmsUseCase>(),
+        )..add(const GetAllDataEvent()));
+
+    getIt.registerLazySingleton(() => DocumentFirmBloc(
           getDocumentsFirmsByIdUseCase: getIt<GetDocumentsFirmsByIdUseCase>(),
           getDocumentByIdUseCase: getIt<GetDocumentByIdUseCase>(),
         ));
@@ -43,6 +51,9 @@ class AppGetIt {
 
     getIt.registerLazySingleton(
         () => GetAllDocumentsUseCase(repository: getIt<DocumentRepository>()));
+
+    getIt.registerLazySingleton(() =>
+        GetAllDocumentsFirmsUseCase(repository: getIt<DocumentRepository>()));
 
     getIt.registerLazySingleton(() =>
         GetDocumentsFirmsByIdUseCase(repository: getIt<DocumentRepository>()));

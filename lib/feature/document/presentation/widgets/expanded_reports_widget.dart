@@ -1,12 +1,9 @@
 import 'package:fdni/core/dependency_injection/get_it.dart';
-import 'package:fdni/feature/document/presentation/widgets/pie_year_document_subtype.dart';
-import 'package:fdni/feature/firm/presentation/blocs/document_bloc/document_bloc.dart';
+import 'package:fdni/feature/document/presentation/widgets/bar_chart_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/enums/document_sub_type.dart';
-import '../../../../core/enums/document_type.dart';
-import '../../../firm/presentation/blocs/document_firm_bloc/document_firm_bloc.dart';
+import '../../../firm/presentation/blocs/all_data_bloc/all_data_bloc.dart';
 
 class ExpandedReportsWidget extends StatefulWidget {
   const ExpandedReportsWidget({super.key});
@@ -16,16 +13,22 @@ class ExpandedReportsWidget extends StatefulWidget {
 }
 
 class _ExpandedReportsWidgetState extends State<ExpandedReportsWidget> {
-  List<bool> _isYearEx = [];
-  List<int> _yrs = [];
+  final List<bool> _isYearEx = [];
+  final List<int> _yrs = [];
 
-  List<bool> _isTypeEx = [];
-  List<DocumentType> _types = [];
+  // final List<bool> _isTypeEx = [];
+  // final List<DocumentType> _types = [];
+
+  Map<int, List<DocumentSubType>> list = {};
+
+  @override
+  void initState() {
+    list = getIt.get<AllDataBloc>().state.existingReports;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    var list = getIt.get<DocumentBloc>().state.existingReports;
-
     return ExpansionPanelList(
       dividerColor: Colors.amber,
       expansionCallback: (int index, bool isExpanded) {
@@ -57,10 +60,11 @@ class _ExpandedReportsWidgetState extends State<ExpandedReportsWidget> {
                     (s) {
                       final id = '$year-1-${s.id}';
 
-                      return PieYearDocumentSubType(
-                        id: id,
-                        chartTitle: s.translation,
-                      );
+                      // return PieYearDocumentSubType(
+                      //   id: id,
+                      //   chartTitle: s.translation,
+                      // );
+                      return BarChartWidget(idDocument: id);
                     },
                   ),
                 ],

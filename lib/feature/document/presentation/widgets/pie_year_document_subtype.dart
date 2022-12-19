@@ -1,5 +1,5 @@
 import 'package:fdni/core/dependency_injection/get_it.dart';
-import 'package:fdni/feature/firm/presentation/blocs/document_firm_bloc/document_firm_bloc.dart';
+import 'package:fdni/feature/firm/presentation/blocs/all_data_bloc/all_data_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -23,12 +23,11 @@ class PieYearDocumentSubType extends StatelessWidget {
   final s = NumberFormat('#0.0 %', "bs-Latn-BA");
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DocumentFirmBloc, DocumentFirmState>(
-      bloc: getIt.get<DocumentFirmBloc>()
-        ..add(GetDocumentFirmByIdEvent(id: id)),
+    return BlocBuilder<AllDataBloc, AllDataState>(
+      bloc: getIt.get<AllDataBloc>(),
       builder: (context, state) {
-        final pieData = state.pieData;
-        if (state is DocumentFirmByIdLoadedState) {
+        if (state is AllDataLoadedState) {
+          final pieData = state.getPieData(id);
           return SafeArea(
             child: Container(
               margin: const EdgeInsets.all(8),

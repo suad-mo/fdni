@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/dependency_injection/get_it.dart';
 import '../../../core/enums/document_sub_type.dart';
+import '../../firm/presentation/blocs/all_data_bloc/all_data_bloc.dart';
 import '../../firm/presentation/blocs/document_bloc/document_bloc.dart';
 import '../../firm/presentation/widgets/data_grid_widget.dart';
 import '../../firm/presentation/widgets/horizontal_bar_chart_widget.dart';
@@ -50,10 +51,10 @@ class _DocumentsPageState extends State<DocumentsPage> {
   Widget build(BuildContext context) {
     // final list = getIt.get<DocumentBloc>().state.existingDocuments;
     // print(list);
-    return BlocBuilder<DocumentBloc, DocumentState>(
-      bloc: getIt.get<DocumentBloc>(),
+    return BlocBuilder<AllDataBloc, AllDataState>(
+      bloc: getIt.get<AllDataBloc>(),
       builder: (context, state) {
-        list = getIt.get<DocumentBloc>().state.existingDocuments;
+        list = state.existingDocuments;
         return Scaffold(
           appBar: AppBar(
             title: const Text('Direkcija za namjensku industriju'),
@@ -221,9 +222,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
                               ...x.value.reversed.map(
                                 (p) => InkWell(
                                     onTap: (() {
-                                      final str =
-                                          '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
-                                      print(str);
+                                      // final str =
+                                      //     '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
+                                      // print(str);
                                     }),
                                     child: Text(p.translation)),
                               ),
@@ -285,9 +286,9 @@ class _DocumentsPageState extends State<DocumentsPage> {
                               ...x.value.reversed.map(
                                 (p) => InkWell(
                                     onTap: (() {
-                                      final str =
-                                          '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
-                                      print(str);
+                                      // final str =
+                                      //     '${e.key}-${x.key.id}${x.key.id == 0 ? "" : -p.id}';
+                                      // print(str);
                                     }),
                                     child: Text(p.translation)),
                               ),
