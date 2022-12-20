@@ -27,7 +27,7 @@ class PieWidget extends StatefulWidget {
 }
 
 class _PieWidgetState extends State<PieWidget> {
-  final data = getIt.get<DocumentFirmBloc>().state.pieData;
+  final pieData = getIt.get<DocumentFirmBloc>().state.pieData;
   final doc = getIt.get<DocumentFirmBloc>().state.doc;
   late TooltipBehavior _tooltipBehavior;
   final f = NumberFormat.currency(
@@ -66,20 +66,28 @@ class _PieWidgetState extends State<PieWidget> {
         // format: 'point.x\n\npoint.y',
         builder: (dynamic data, dynamic point, dynamic series, int pointIndex,
             int seriesIndex) {
+          // print(
+          //     'data:$data, point: $point, series: $series, pointIndex: $pointIndex, seriesIndex: $seriesIndex');
           return Container(
-              height: 50,
+              height: 80,
               width: 150,
+              color: Colors.greenAccent,
               alignment: Alignment.center,
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(66, 244, 164, 1),
-              ),
+              // decoration: BoxDecoration(
+              //     color: Colors.grey,
+              //     // shape: BoxShape.rectangle,
+              //     // border: Border.all(),
+              //     borderRadius: BorderRadius.circular(20)),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
                     data is PieDataEntitey ? data.firma : "",
-                    maxLines: 2,
+                    maxLines: 3,
                     softWrap: true,
-                    overflow: TextOverflow.ellipsis,
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.fade,
                   ),
                   Text(data is PieDataEntitey ? f.format(data.total) : ""),
                 ],
@@ -90,15 +98,15 @@ class _PieWidgetState extends State<PieWidget> {
 
   @override
   Widget build(BuildContext context) {
-    data.sort(((a, b) => a.total.compareTo(b.total)));
-    final pieData = data;
+    // data.sort(((a, b) => a.total.compareTo(b.total)));
+    // final pieData = data;
 
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text(_title())),
         body: Center(
           child: Container(
-            color: Colors.amber[50],
+            // color: Colors.amber[50],
             child: SfCircularChart(
               title: ChartTitle(text: _titleChart()),
               legend: Legend(

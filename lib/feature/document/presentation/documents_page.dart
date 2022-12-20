@@ -6,9 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/dependency_injection/get_it.dart';
 import '../../../core/enums/document_sub_type.dart';
 import '../../firm/presentation/blocs/all_data_bloc/all_data_bloc.dart';
-import '../../firm/presentation/widgets/data_grid_widget.dart';
-import '../../firm/presentation/widgets/horizontal_bar_chart_widget.dart';
-import '../../firm/presentation/widgets/pie_widget.dart';
 
 class DocumentsPage extends StatefulWidget {
   const DocumentsPage({super.key});
