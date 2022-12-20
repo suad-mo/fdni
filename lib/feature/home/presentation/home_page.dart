@@ -1,5 +1,6 @@
 import 'package:fdni/feature/document/presentation/documents_page.dart';
 import 'package:fdni/feature/firm/presentation/firms_page.dart';
+import 'package:fdni/feature/home/presentation/tabs/years_tab_widget.dart';
 import 'package:fdni/main.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,8 @@ class _HomePageState extends State<HomePage> {
   int index = 0;
   @override
   Widget build(BuildContext context) => Scaffold(
+        // persistentFooterButtons: [Icon(Icons.add)],
+
         bottomNavigationBar: buildBottomBar(),
         body: buildPages(),
       );
@@ -21,6 +24,7 @@ class _HomePageState extends State<HomePage> {
   buildBottomBar() {
     // const style = TextStyle(color: Colors.white);
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       backgroundColor: Theme.of(context).primaryColorDark,
       selectedItemColor: Colors.white70,
       unselectedItemColor: Colors.white24,
@@ -35,9 +39,10 @@ class _HomePageState extends State<HomePage> {
           label: 'Firms',
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.factory),
-          label: 'Firms',
+          icon: Icon(Icons.preview),
+          label: 'Staistic',
         ),
+        BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
       ],
       onTap: (index) => setState(() => this.index = index),
     );
@@ -53,6 +58,8 @@ class _HomePageState extends State<HomePage> {
         return const MyHomePage(
           title: 'Title',
         );
+      case 3:
+        return const YearsTabWidget();
       default:
         return Container();
     }

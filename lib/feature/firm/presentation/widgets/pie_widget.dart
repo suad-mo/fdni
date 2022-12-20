@@ -27,7 +27,7 @@ class PieWidget extends StatefulWidget {
 }
 
 class _PieWidgetState extends State<PieWidget> {
-  final pieData = getIt.get<DocumentFirmBloc>().state.pieData;
+  final data = getIt.get<DocumentFirmBloc>().state.pieData;
   final doc = getIt.get<DocumentFirmBloc>().state.doc;
   late TooltipBehavior _tooltipBehavior;
   final f = NumberFormat.currency(
@@ -90,6 +90,9 @@ class _PieWidgetState extends State<PieWidget> {
 
   @override
   Widget build(BuildContext context) {
+    data.sort(((a, b) => a.total.compareTo(b.total)));
+    final pieData = data;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(title: Text(_title())),

@@ -30,7 +30,7 @@ class _ExpandedReportsWidgetState extends State<ExpandedReportsWidget> {
   @override
   Widget build(BuildContext context) {
     return ExpansionPanelList(
-      dividerColor: Colors.amber,
+      // dividerColor: Colors.amber,
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
           _isYearEx[index] = !isExpanded;

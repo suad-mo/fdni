@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../core/dependency_injection/get_it.dart';
 import '../../../core/enums/document_sub_type.dart';
 import '../../firm/presentation/blocs/all_data_bloc/all_data_bloc.dart';
-import '../../firm/presentation/blocs/document_bloc/document_bloc.dart';
 import '../../firm/presentation/widgets/data_grid_widget.dart';
 import '../../firm/presentation/widgets/horizontal_bar_chart_widget.dart';
 import '../../firm/presentation/widgets/pie_widget.dart';
@@ -20,22 +19,23 @@ class DocumentsPage extends StatefulWidget {
 
 class _DocumentsPageState extends State<DocumentsPage> {
   final years = <int>[2022, 2021, 2020, 2016, 2015, 2014, 2013, 2012];
+  late AllDataBloc bloc;
   int currentYear = 2022;
   DocumentType currentType = DocumentType.plan;
   DocumentSubType currentSubType = DocumentSubType.quarter3;
-  late Map<int, Map<DocumentType, List<DocumentSubType>>> list;
+  Map<int, Map<DocumentType, List<DocumentSubType>>> list = {};
 
   final ButtonStyle _offStyle = ElevatedButton.styleFrom(
-    foregroundColor: Colors.black87, backgroundColor: Colors.grey[300],
-    // minimumSize: Size(88, 36),
+    foregroundColor: Colors.black87,
+    backgroundColor: Colors.grey[300],
     padding: const EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(2)),
     ),
   );
   final ButtonStyle _onStyle = ElevatedButton.styleFrom(
-    foregroundColor: Colors.black87, backgroundColor: Colors.amber,
-    // minimumSize: Size(88, 36),
+    foregroundColor: Colors.black87,
+    backgroundColor: Colors.amber,
     padding: const EdgeInsets.symmetric(horizontal: 16),
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.all(Radius.circular(2)),
@@ -43,132 +43,143 @@ class _DocumentsPageState extends State<DocumentsPage> {
   );
   @override
   void initState() {
-    list = getIt.get<DocumentBloc>().state.existingDocuments;
+    bloc = getIt.get<AllDataBloc>()..add(const GetAllDataEvent());
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // final list = getIt.get<DocumentBloc>().state.existingDocuments;
-    // print(list);
     return BlocBuilder<AllDataBloc, AllDataState>(
-      bloc: getIt.get<AllDataBloc>(),
+      bloc: bloc,
       builder: (context, state) {
         list = state.existingDocuments;
-        return Scaffold(
-          appBar: AppBar(
-            title: const Text('Direkcija za namjensku industriju'),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(context, HorizontalBarChartWidget.route());
-                },
-                icon: Transform(
-                  transform: Matrix4.rotationZ(1.57),
-                  alignment: Alignment.center,
-                  child: const Icon(Icons.bar_chart),
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(context, PieWidget.route());
-                },
-                icon: const Icon(Icons.pie_chart),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.push(context, DataGridWidget.route());
-                },
-                icon: const Icon(Icons.table_chart),
-              ),
-            ],
-          ),
-          body: SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: years.length,
-                    itemBuilder: ((context, index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                              style: currentYear == years[index]
-                                  ? _onStyle
-                                  : _offStyle,
-                              onPressed: (() {
-                                setState(() {
-                                  currentYear = years[index];
-                                });
-                              }),
-                              child: Text(years[index].toString())),
-                        )),
-                  ),
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  height: 40,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: DocumentType.values.length - 1,
-                    itemBuilder: ((context, index) => Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ElevatedButton(
-                              style: currentType == DocumentType.values[index]
-                                  ? _onStyle
-                                  : _offStyle,
-                              onPressed: (() {
-                                final x =
-                                    currentType == DocumentType.values[index];
-                                if (!x) {
-                                  setState(() {
-                                    currentType = DocumentType.values[index];
-                                  });
-                                }
-                              }),
-                              child: Text(DocumentType.values[index].name)),
-                        )),
-                  ),
-                ),
-                if (currentType == DocumentType.raport)
-                  SizedBox(
-                    width: double.infinity,
-                    height: 40,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: DocumentSubType.values.length - 1,
-                      itemBuilder: ((context, index) => index == 0
-                          ? Container()
-                          : Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: ElevatedButton(
-                                  style: currentSubType ==
-                                          DocumentSubType.values[index]
-                                      ? _onStyle
-                                      : _offStyle,
-                                  onPressed: (() {
-                                    final x = currentSubType ==
-                                        DocumentSubType.values[index];
-                                    if (!x) {
-                                      setState(() {
-                                        currentSubType =
-                                            DocumentSubType.values[index];
-                                      });
-                                    }
-                                  }),
-                                  child: Text(DocumentSubType
-                                      .values[index].translationII)),
-                            )),
-                    ),
-                  ),
-                // ...listCartWidget,
-                const ExpandedReportsWidget(),
-              ],
+        if (state is AllDataLoadedState) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text('Direkcija za namjensku industriju'),
+              // actions: [
+              //   IconButton(
+              //     onPressed: () {
+              //       Navigator.push(context, HorizontalBarChartWidget.route());
+              //     },
+              //     icon: Transform(
+              //       transform: Matrix4.rotationZ(1.57),
+              //       alignment: Alignment.center,
+              //       child: const Icon(Icons.bar_chart),
+              //     ),
+              //   ),
+              //   IconButton(
+              //     onPressed: () {
+              //       Navigator.push(context, PieWidget.route());
+              //     },
+              //     icon: const Icon(Icons.pie_chart),
+              //   ),
+              //   IconButton(
+              //     onPressed: () {
+              //       Navigator.push(context, DataGridWidget.route());
+              //     },
+              //     icon: const Icon(Icons.table_chart),
+              //   ),
+              // ],
             ),
+            body: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.all(8),
+                    child: Text('Izvještajni period'),
+                  ),
+                  // SizedBox(
+                  //   width: double.infinity,
+                  //   height: 40,
+                  //   child: ListView.builder(
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: years.length,
+                  //     itemBuilder: ((context, index) => Padding(
+                  //           padding: const EdgeInsets.all(8.0),
+                  //           child: ElevatedButton(
+                  //               style: currentYear == years[index]
+                  //                   ? _onStyle
+                  //                   : _offStyle,
+                  //               onPressed: (() {
+                  //                 setState(() {
+                  //                   currentYear = years[index];
+                  //                 });
+                  //               }),
+                  //               child: Text(years[index].toString())),
+                  //         )),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   width: double.infinity,
+                  //   height: 40,
+                  //   child: ListView.builder(
+                  //     scrollDirection: Axis.horizontal,
+                  //     itemCount: DocumentType.values.length - 1,
+                  //     itemBuilder: ((context, index) => Padding(
+                  //           padding: const EdgeInsets.all(8.0),
+                  //           child: ElevatedButton(
+                  //               style: currentType == DocumentType.values[index]
+                  //                   ? _onStyle
+                  //                   : _offStyle,
+                  //               onPressed: (() {
+                  //                 final x =
+                  //                     currentType == DocumentType.values[index];
+                  //                 if (!x) {
+                  //                   setState(() {
+                  //                     currentType = DocumentType.values[index];
+                  //                   });
+                  //                 }
+                  //               }),
+                  //               child: Text(DocumentType.values[index].name)),
+                  //         )),
+                  //   ),
+                  // ),
+                  // if (currentType == DocumentType.raport)
+                  //   SizedBox(
+                  //     width: double.infinity,
+                  //     height: 40,
+                  //     child: ListView.builder(
+                  //       scrollDirection: Axis.horizontal,
+                  //       itemCount: DocumentSubType.values.length - 1,
+                  //       itemBuilder: ((context, index) => index == 0
+                  //           ? Container()
+                  //           : Padding(
+                  //               padding: const EdgeInsets.all(8.0),
+                  //               child: ElevatedButton(
+                  //                   style: currentSubType ==
+                  //                           DocumentSubType.values[index]
+                  //                       ? _onStyle
+                  //                       : _offStyle,
+                  //                   onPressed: (() {
+                  //                     final x = currentSubType ==
+                  //                         DocumentSubType.values[index];
+                  //                     if (!x) {
+                  //                       setState(() {
+                  //                         currentSubType =
+                  //                             DocumentSubType.values[index];
+                  //                       });
+                  //                     }
+                  //                   }),
+                  //                   child: Text(DocumentSubType
+                  //                       .values[index].translationII)),
+                  //             )),
+                  //     ),
+                  //   ),
+                  // // ...listCartWidget,
+                  ExpandedReportsWidget(),
+                ],
+              ),
+            ),
+          );
+        }
+        return const Center(
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: CircularProgressIndicator(),
           ),
         );
       },

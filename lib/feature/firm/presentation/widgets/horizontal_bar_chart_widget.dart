@@ -41,7 +41,10 @@ class _HorizontalBarChartWidgetState extends State<HorizontalBarChartWidget> {
 
   @override
   void initState() {
-    _barData = getIt.get<DocumentFirmBloc>().state.barData;
+    var x = getIt.get<DocumentFirmBloc>().state.barData;
+    x.sort(((a, b) => a.total.compareTo(b.total)));
+    _barData = x;
+    // getIt.get<DocumentFirmBloc>().state.barData;
     _doc = getIt.get<DocumentFirmBloc>().state.doc;
     _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();

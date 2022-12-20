@@ -36,12 +36,16 @@ class _BarChartWidgetState extends State<BarChartWidget> {
       period = _doc!.subType!;
     }
 
-    return 'Izvještaj za $year .godinu \n$period. kvartal';
+    // return 'Izvještaj za $year .godinu \n$period. kvartal';
+    return '$period. kvartal';
   }
 
   @override
   void initState() {
-    _barData = getIt.get<AllDataBloc>().state.getBarData(widget.idDocument);
+    final x = getIt.get<AllDataBloc>().state.getBarData(widget.idDocument);
+    x.sort((a, b) => a.total.compareTo(b.total));
+    _barData = x;
+    // getIt.get<AllDataBloc>().state.getBarData(widget.idDocument);
     _doc = getIt.get<AllDataBloc>().state.getDocumentById(widget.idDocument);
     _tooltipBehavior = TooltipBehavior(enable: true);
     super.initState();
@@ -72,6 +76,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
             dataSource: _barData,
             xValueMapper: (BarDataEntitey data, _) => data.firma.shortName,
             yValueMapper: (BarDataEntitey data, _) => data.nvo, // 1000000,
+
             dataLabelSettings: const DataLabelSettings(
               isVisible: true,
               showCumulativeValues: true,
@@ -101,6 +106,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
             yValueMapper: (BarDataEntitey data, _) => data.usluge, // 1000000,
             dataLabelSettings: const DataLabelSettings(
               isVisible: true,
+              showCumulativeValues: true,
             ),
             // width: 0.3,
             // spacing: 0.1,
@@ -108,9 +114,10 @@ class _BarChartWidgetState extends State<BarChartWidget> {
         ],
         primaryXAxis: CategoryAxis(),
         primaryYAxis: NumericAxis(
-            edgeLabelPlacement: EdgeLabelPlacement.shift,
-            numberFormat: NumberFormat.compactCurrency(symbol: ''),
-            title: AxisTitle(text: 'Proizvodnja NVO')),
+          edgeLabelPlacement: EdgeLabelPlacement.shift,
+          numberFormat: NumberFormat.compactCurrency(symbol: ''),
+          // title: AxisTitle(text: 'Proizvodnja NVO'),
+        ),
       ),
     );
   }

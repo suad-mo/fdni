@@ -51,7 +51,7 @@ class AllDataBloc extends Bloc<AllDataEvent, AllDataState> {
     eitherDocs.fold((failure) {
       emit(AllDataRetrievalErrorState());
     }, (docs) {
-      documents = docs;
+      documents = docs.reversed.toList();
       emit(AllDataFirmsAndDocumentLoadedState(
         firms: firms,
         documents: documents,
