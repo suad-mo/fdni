@@ -1,5 +1,6 @@
 import 'package:fdni/core/enums/firms.dart';
 import 'package:fdni/feature/firm/domain/entities/document_entity.dart';
+import 'package:fdni/feature/firm/presentation/pages/firm_document_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_datagrid/datagrid.dart';
@@ -7,7 +8,6 @@ import 'package:syncfusion_flutter_datagrid/datagrid.dart';
 import '../../../../core/dependency_injection/get_it.dart';
 import '../../domain/entities/bar_data_entity.dart';
 import '../blocs/document_firm_bloc/document_firm_bloc.dart';
-import '../pages/firm_doc_page.dart';
 
 class DataGridWidget extends StatefulWidget {
   const DataGridWidget({super.key});
@@ -79,10 +79,18 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                       : 'Get Selection Information'),
                   onPressed: () {
                     if (currentFirm != null) {
+                      // Navigator.push(
+                      //   context,
+                      //   FirmDocPage.route(firm: currentFirm!),
+                      // );
+                      final idDocument = _doc.idDocument;
+                      final idFirm = currentFirm?.id ?? 0;
                       Navigator.push(
-                        context,
-                        FirmDocPage.route(firm: currentFirm!),
-                      );
+                          context,
+                          FirmDocumentDetailPage.route(
+                            idDocument: idDocument,
+                            idFirm: idFirm,
+                          ));
                     }
                   }),
               Expanded(
