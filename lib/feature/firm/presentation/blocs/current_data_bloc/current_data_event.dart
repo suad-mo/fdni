@@ -6,3 +6,13 @@ abstract class CurrentDataEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class ChangeCurrentDataEvent extends CurrentDataEvent {
+  final int? idFirm;
+  final String? idDocument;
+
+  const ChangeCurrentDataEvent({
+    this.idFirm,
+    this.idDocument,
+  });
+}
