@@ -12,14 +12,14 @@ abstract class AllDataState extends Equatable {
 
   List<DocumentFirmEntity> get allData => [];
 
-  FirmEntity? getFirmById(int idFirm) {
+  FirmEntity? getFirmById(int? idFirm) {
     if (firms.any((e) => e.idFirm == idFirm)) {
       return firms.firstWhere((e) => e.idFirm == idFirm);
     }
     return null;
   }
 
-  DocumentEntity? getDocumentById(String idDocument) {
+  DocumentEntity? getDocumentById(String? idDocument) {
     if (documents.any((e) => e.idDocument == idDocument)) {
       return documents.firstWhere((e) => e.idDocument == idDocument);
     }

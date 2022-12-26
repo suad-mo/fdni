@@ -128,140 +128,198 @@ class DataTableTabWidget extends StatelessWidget {
       symbol: "KM",
     );
     final p = NumberFormat('#0.0 %', "bs-Latn-BA");
+    final da = DateFormat('dd.MM.yyyy');
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: DataTable(
-        // sortColumnIndex: 0,
-        columns: const <DataColumn>[
-          DataColumn(
-            label: Expanded(
-              child: Text(
-                'Vrsta',
-                style: TextStyle(fontStyle: FontStyle.italic),
-                textAlign: TextAlign.right,
-              ),
-            ),
-          ),
-          DataColumn(
-            numeric: true,
-            label: Expanded(
-              child: Text(
-                'Vrijednost',
-                style: TextStyle(fontStyle: FontStyle.italic),
-                textAlign: TextAlign.right,
-              ),
-            ),
-          ),
-          DataColumn(
-            label: Expanded(
-              child: Text(
-                '%',
-                style: TextStyle(fontStyle: FontStyle.italic),
-                textAlign: TextAlign.right,
-              ),
-            ),
-          ),
-        ],
-        rows: <DataRow>[
-          DataRow(
-            cells: <DataCell>[
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight, child: const Text('NVO')),
-              ),
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(f.format(d.nvo))),
-              ),
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(p.format(d.nvo! / d.ukupno!))),
-              ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const SizedBox(
+                  width: 60,
+                  // alignment: Alignment.centerRight,
+                  child: Text('Broj:')),
+              Text(d.aktOznaka!),
             ],
           ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: const Text(
-                      'Tržišni \nartikli',
-                      // softWrap: true,
-                      textAlign: TextAlign.right,
-                    )),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Text(f.format(d.ta)),
-                ),
-              ),
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(p.format(d.ta! / d.ukupno!))),
-              ),
+          Row(
+            children: [
+              const SizedBox(
+                  width: 60,
+                  // alignment: Alignment.centerRight,
+                  child: Text('Datum:')),
+              Text(da.format(d.aktDatum!)),
             ],
           ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: const Text(
-                      'Usluge',
-                      softWrap: true,
-                    )),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.centerRight,
-                  child: Text(f.format(d.usluge)),
-                ),
-              ),
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(p.format(d.usluge! / d.ukupno!))),
-              ),
-            ],
-          ),
-          DataRow(
-            cells: <DataCell>[
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: const Text(
-                      'Ukupno',
-                      style: TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold),
-                    )),
-              ),
-              DataCell(
-                Container(
-                  alignment: Alignment.centerRight,
+          DataTable(
+            // sortColumnIndex: 0,
+            columns: const <DataColumn>[
+              DataColumn(
+                label: Expanded(
                   child: Text(
-                    f.format(d.ukupno),
-                    style: const TextStyle(
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold),
+                    'Vrsta',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                    textAlign: TextAlign.right,
                   ),
                 ),
               ),
-              DataCell(
-                Container(
-                    alignment: Alignment.centerRight,
-                    child: Text(
-                      p.format(d.ukupno! / d.ukupno!),
-                      style: const TextStyle(
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.bold),
-                    )),
+              DataColumn(
+                numeric: true,
+                label: Expanded(
+                  child: Text(
+                    'Vrijednost',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ),
+              DataColumn(
+                label: Expanded(
+                  child: Text(
+                    '%',
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
               ),
             ],
+            rows: <DataRow>[
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: const Text('NVO')),
+                  ),
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(f.format(d.nvo))),
+                  ),
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(p.format(d.nvo! / d.ukupno!))),
+                  ),
+                ],
+              ),
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: const Text(
+                          'Tržišni \nartikli',
+                          // softWrap: true,
+                          textAlign: TextAlign.right,
+                        )),
+                  ),
+                  DataCell(
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: Text(f.format(d.ta)),
+                    ),
+                  ),
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(p.format(d.ta! / d.ukupno!))),
+                  ),
+                ],
+              ),
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: const Text(
+                          'Usluge',
+                          softWrap: true,
+                        )),
+                  ),
+                  DataCell(
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: Text(f.format(d.usluge)),
+                    ),
+                  ),
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(p.format(d.usluge! / d.ukupno!))),
+                  ),
+                ],
+              ),
+              DataRow(
+                cells: <DataCell>[
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: const Text(
+                          'Ukupno',
+                          style: TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                  DataCell(
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: Text(
+                        f.format(d.ukupno),
+                        style: const TextStyle(
+                            fontStyle: FontStyle.italic,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                  DataCell(
+                    Container(
+                        alignment: Alignment.centerRight,
+                        child: Text(
+                          p.format(d.ukupno! / d.ukupno!),
+                          style: const TextStyle(
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.bold),
+                        )),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            children: [
+              const SizedBox(
+                  // width: 60,
+                  // alignment: Alignment.centerRight,
+                  child: Text('Napomena: ')),
+              Text(d.napomena ?? '-'),
+            ],
+          ),
+          // Row(
+          //   children: [
+          Container(
+              // width: 80,
+              alignment: Alignment.topLeft,
+              margin: EdgeInsets.all(10),
+              // height: 40,
+              child: const Text('Dodatno: ')),
+          Container(
+            // height: 100,
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              d.dopuna ?? '-',
+              maxLines: 5,
+              softWrap: true,
+              // overflow: TextOverflow.clip,
+              style: TextStyle(fontStyle: FontStyle.italic),
+            ),
+            //   ),
+            // ],
           ),
         ],
       ),
