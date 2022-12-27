@@ -3,7 +3,7 @@ import 'package:fdni/feature/firm/domain/entities/document_entity.dart';
 import 'package:fdni/feature/firm/domain/entities/document_firm_entity.dart';
 import 'package:fdni/feature/firm/domain/entities/firm_entity.dart';
 
-import '../../../../core/enums/firms.dart';
+import '../../../../core/enums/firm.dart';
 import '../../../../core/error/failures.dart';
 import '../entities/firm_data_entity.dart';
 
@@ -17,5 +17,5 @@ abstract class DocumentRepository {
   Future<Either<Failure, DocumentEntity>> getDocumentById(String idDocument);
 
   Future<Either<Failure, List<FirmDataEntity>>> getFirmDocumentsByFirm(
-      Firms firm);
+      Firm firm);
 }

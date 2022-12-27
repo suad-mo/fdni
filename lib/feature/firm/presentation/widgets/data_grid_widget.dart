@@ -1,4 +1,4 @@
-import 'package:fdni/core/enums/firms.dart';
+import 'package:fdni/core/enums/firm.dart';
 import 'package:fdni/feature/firm/domain/entities/document_entity.dart';
 import 'package:fdni/feature/firm/presentation/pages/firm_document_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
   late DataGridController _controller; // = DataGridController()
   late DocumentEntity _doc;
 
-  Firms? currentFirm;
+  Firm? currentFirm;
 
   @override
   void initState() {
@@ -107,7 +107,7 @@ class _DataGridWidgetState extends State<DataGridWidget> {
                   onSelectionChanged: (addedRows, removedRows) {
                     final x = addedRows[0].getCells().first.value;
                     setState(() {
-                      currentFirm = Firms.getWithId(x);
+                      currentFirm = Firm.getWithId(x);
                     });
                   },
                   columnWidthCalculationRange:

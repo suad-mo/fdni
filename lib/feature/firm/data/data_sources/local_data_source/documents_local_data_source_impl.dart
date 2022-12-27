@@ -1,4 +1,4 @@
-import 'package:fdni/core/enums/firms.dart';
+import 'package:fdni/core/enums/firm.dart';
 
 import '../../../../../core/input_data/fixture_reader.dart';
 import '../../../domain/entities/document_entity.dart';
@@ -84,7 +84,7 @@ class DocumentsLocalDataSourceImpl implements DocumentsLocalDataSource {
   }
 
   @override
-  Future<List<FirmDataEntity>> getFirmDocumentsByIdFirm(Firms firm) async {
+  Future<List<FirmDataEntity>> getFirmDocumentsByIdFirm(Firm firm) async {
     try {
       const String fileName = 'data_documents_firms.json';
       final xMap = await readJsonFile(fileName);
@@ -115,7 +115,7 @@ class DocumentsLocalDataSourceImpl implements DocumentsLocalDataSource {
 
   @override
   Future<DocumentFirmEntity> getFirmDocumentByFirmAndIdDocument(
-      Firms firm, String idDocument) async {
+      Firm firm, String idDocument) async {
     final docs = await getDocumentsFirmsById(idDocument);
     final doc = docs.firstWhere((d) => d.idFirm == firm.id);
     return doc;

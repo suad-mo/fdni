@@ -8,7 +8,7 @@ abstract class FirmAllDocumentsEvent extends Equatable {
 }
 
 class GetFirmAllDocumentsByIdEvent extends FirmAllDocumentsEvent {
-  final Firms firm;
+  final Firm firm;
   const GetFirmAllDocumentsByIdEvent({required this.firm});
 
   @override

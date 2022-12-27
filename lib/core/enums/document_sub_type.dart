@@ -30,7 +30,7 @@ enum DocumentSubType {
     translationII: 'IV Kvartal',
   ),
   nullDocumentSubType(
-    id: 4,
+    id: -1,
     name: 'Null',
     translation: 'Null',
     translationII: 'Null',

@@ -105,73 +105,70 @@ class _PieWidgetState extends State<PieWidget> {
       child: Scaffold(
         appBar: AppBar(title: Text(_title())),
         body: Center(
-          child: Container(
-            // color: Colors.amber[50],
-            child: SfCircularChart(
-              title: ChartTitle(text: _titleChart()),
-              legend: Legend(
-                isVisible: true,
-                overflowMode: LegendItemOverflowMode.wrap,
-                position: LegendPosition.bottom,
-                // Templating the legend item
-                // legendItemBuilder:
-                //     (String name, dynamic series, dynamic point, int index) {
-                //   print(name);
-                //   print(point.label);
-                //   return Container(
-                //       height: 20,
-                //       width: 60,
-                //       child: Container(child: Text(point.x.toString())));
-                // }
-                // toggleSeriesVisibility: true,
-                // title: LegendTitle(
-                //   text: 'Firme namjenske industrije',
-                //   textStyle: TextStyle(
-                //       color: Colors.blueAccent,
-                //       fontSize: 12,
-                //       fontStyle: FontStyle.italic,
-                //       fontWeight: FontWeight.w900),
-                // ),
-              ),
-              tooltipBehavior: _tooltipBehavior,
-              series: <CircularSeries>[
-                PieSeries<PieDataEntitey, String>(
-                  // onPointTap: (ChartPointDetails details) {
-                  //   print(widget.data[details.pointIndex!].firma);
-                  //   print(details.seriesIndex);
-                  //   print(details.dataPoints![0].toString());
-                  // },
-                  // RadialBarSeries<PieDataEntitey, String>(
-                  // DoughnutSeries<PieDataEntitey, String>(
-                  dataSource: pieData, // widget.data,
-                  xValueMapper: (PieDataEntitey data, _) => data.firma,
-                  yValueMapper: (PieDataEntitey data, _) => data.total,
-                  dataLabelMapper: (PieDataEntitey data, _) {
-                    var x = 0.0;
-                    for (var value in pieData) {
-                      x += value.total;
-                    }
-                    final y = data.total / x;
-                    return s.format(y);
-                  },
-                  radius: '75%',
-                  explode: true,
-                  dataLabelSettings: const DataLabelSettings(
-                    isVisible: true,
-                    // Avoid labels intersection
-                    labelIntersectAction: LabelIntersectAction.shift,
-                    // labelPosition: ChartDataLabelPosition.outside,
-                    connectorLineSettings: ConnectorLineSettings(
-                        type: ConnectorType.curve, length: '25%'),
-                    useSeriesColor: true,
-                  ),
-                  enableTooltip: true,
-                  explodeAll: true,
-
-                  // maximumValue: 40000, // Samo za RadialBarSeries
-                )
-              ],
+          child: SfCircularChart(
+            title: ChartTitle(text: _titleChart()),
+            legend: Legend(
+              isVisible: true,
+              overflowMode: LegendItemOverflowMode.wrap,
+              position: LegendPosition.bottom,
+              // Templating the legend item
+              // legendItemBuilder:
+              //     (String name, dynamic series, dynamic point, int index) {
+              //   print(name);
+              //   print(point.label);
+              //   return Container(
+              //       height: 20,
+              //       width: 60,
+              //       child: Container(child: Text(point.x.toString())));
+              // }
+              // toggleSeriesVisibility: true,
+              // title: LegendTitle(
+              //   text: 'Firme namjenske industrije',
+              //   textStyle: TextStyle(
+              //       color: Colors.blueAccent,
+              //       fontSize: 12,
+              //       fontStyle: FontStyle.italic,
+              //       fontWeight: FontWeight.w900),
+              // ),
             ),
+            tooltipBehavior: _tooltipBehavior,
+            series: <CircularSeries>[
+              PieSeries<PieDataEntitey, String>(
+                // onPointTap: (ChartPointDetails details) {
+                //   print(widget.data[details.pointIndex!].firma);
+                //   print(details.seriesIndex);
+                //   print(details.dataPoints![0].toString());
+                // },
+                // RadialBarSeries<PieDataEntitey, String>(
+                // DoughnutSeries<PieDataEntitey, String>(
+                dataSource: pieData, // widget.data,
+                xValueMapper: (PieDataEntitey data, _) => data.firma,
+                yValueMapper: (PieDataEntitey data, _) => data.total,
+                dataLabelMapper: (PieDataEntitey data, _) {
+                  var x = 0.0;
+                  for (var value in pieData) {
+                    x += value.total;
+                  }
+                  final y = data.total / x;
+                  return s.format(y);
+                },
+                radius: '75%',
+                explode: true,
+                dataLabelSettings: const DataLabelSettings(
+                  isVisible: true,
+                  // Avoid labels intersection
+                  labelIntersectAction: LabelIntersectAction.shift,
+                  // labelPosition: ChartDataLabelPosition.outside,
+                  connectorLineSettings: ConnectorLineSettings(
+                      type: ConnectorType.curve, length: '25%'),
+                  useSeriesColor: true,
+                ),
+                enableTooltip: true,
+                explodeAll: true,
+
+                // maximumValue: 40000, // Samo za RadialBarSeries
+              )
+            ],
           ),
         ),
       ),

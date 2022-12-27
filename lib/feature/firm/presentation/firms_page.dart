@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/enums/firms.dart';
+import '../../../core/enums/firm.dart';
 import 'pages/firm_doc_page.dart';
 
 class FirmsPage extends StatelessWidget {
@@ -24,9 +24,9 @@ class FirmsPage extends StatelessWidget {
           child: ListView.builder(
               // controller: ScrollController(),
               // padding: EdgeInsets.all(0),
-              itemCount: Firms.values.length,
+              itemCount: Firm.values.length,
               itemBuilder: ((context, index) {
-                final firm = Firms.values[index];
+                final firm = Firm.values[index];
                 if (firm.id > 0) {
                   return ListTile(
                     // contentPadding: EdgeInsets.all(4),

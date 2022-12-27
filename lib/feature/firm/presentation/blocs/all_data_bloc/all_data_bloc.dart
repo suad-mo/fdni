@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/enums/document_sub_type.dart';
 import '../../../../../core/enums/document_type.dart';
-import '../../../../../core/enums/firms.dart';
+import '../../../../../core/enums/firm.dart';
 import '../../../domain/entities/bar_data_entity.dart';
 import '../../../domain/entities/document_entity.dart';
 import '../../../domain/entities/document_firm_entity.dart';

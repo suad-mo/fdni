@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../../../core/enums/firms.dart';
+import '../../../../../core/enums/firm.dart';
 import '../../../domain/entities/firm_data_entity.dart';
 import '../../../domain/use_cases/get_firm_all_documents_by_id.dart';
 

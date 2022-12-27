@@ -5,11 +5,11 @@ import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../../../../core/dependency_injection/get_it.dart';
-import '../../../../core/enums/firms.dart';
+import '../../../../core/enums/firm.dart';
 import '../blocs/firm_all_documents_bloc/firm_all_documents_bloc.dart';
 
 class FirmDocPage extends StatefulWidget {
-  final Firms firm;
+  final Firm firm;
   // final String? idDocument;
   // late FirmAllDocumentsBloc bloc;
   const FirmDocPage({
@@ -18,7 +18,7 @@ class FirmDocPage extends StatefulWidget {
     // this.idDocument,
   });
 
-  static Route<void> route({required Firms firm}) => MaterialPageRoute<void>(
+  static Route<void> route({required Firm firm}) => MaterialPageRoute<void>(
         builder: (_) => FirmDocPage(firm: firm),
       );
 

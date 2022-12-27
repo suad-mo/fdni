@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:equatable/equatable.dart';
-import 'package:fdni/core/enums/firms.dart';
+import 'package:fdni/core/enums/firm.dart';
 import 'package:fdni/feature/firm/domain/entities/bar_data_entity.dart';
 import 'package:fdni/feature/firm/domain/entities/document_entity.dart';
 import 'package:fdni/feature/firm/domain/use_cases/get_document_by_id.dart';

@@ -22,22 +22,22 @@ class _DocumentsPageState extends State<DocumentsPage> {
   DocumentSubType currentSubType = DocumentSubType.quarter3;
   Map<int, Map<DocumentType, List<DocumentSubType>>> list = {};
 
-  final ButtonStyle _offStyle = ElevatedButton.styleFrom(
-    foregroundColor: Colors.black87,
-    backgroundColor: Colors.grey[300],
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
-    ),
-  );
-  final ButtonStyle _onStyle = ElevatedButton.styleFrom(
-    foregroundColor: Colors.black87,
-    backgroundColor: Colors.amber,
-    padding: const EdgeInsets.symmetric(horizontal: 16),
-    shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(Radius.circular(2)),
-    ),
-  );
+  // final ButtonStyle _offStyle = ElevatedButton.styleFrom(
+  //   foregroundColor: Colors.black87,
+  //   backgroundColor: Colors.grey[300],
+  //   padding: const EdgeInsets.symmetric(horizontal: 16),
+  //   shape: const RoundedRectangleBorder(
+  //     borderRadius: BorderRadius.all(Radius.circular(2)),
+  //   ),
+  // );
+  // final ButtonStyle _onStyle = ElevatedButton.styleFrom(
+  //   foregroundColor: Colors.black87,
+  //   backgroundColor: Colors.amber,
+  //   padding: const EdgeInsets.symmetric(horizontal: 16),
+  //   shape: const RoundedRectangleBorder(
+  //     borderRadius: BorderRadius.all(Radius.circular(2)),
+  //   ),
+  // );
   @override
   void initState() {
     bloc = getIt.get<AllDataBloc>()..add(const GetAllDataEvent());

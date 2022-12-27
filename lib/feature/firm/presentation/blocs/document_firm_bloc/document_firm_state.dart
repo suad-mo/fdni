@@ -61,7 +61,7 @@ class DocumentFirmByIdLoadedState extends DocumentFirmState {
       final nvo = doc.nvo;
       final ta = doc.ta;
       final usluge = doc.usluge;
-      final firma = Firms.getWithId(doc.idFirm);
+      final firma = Firm.getWithId(doc.idFirm);
       final dat = BarDataEntitey(
         firma: firma,
         nvo: nvo,

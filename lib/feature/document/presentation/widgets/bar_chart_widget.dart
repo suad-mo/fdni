@@ -25,6 +25,7 @@ class _BarChartWidgetState extends State<BarChartWidget> {
   late TooltipBehavior _tooltipBehavior;
 
   String _titleChart() {
+    // ignore: unused_local_variable
     int year = 2022;
     int period = 3;
 

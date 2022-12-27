@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../core/dependency_injection/get_it.dart';
-import '../../../../core/enums/firms.dart';
+import '../../../../core/enums/firm.dart';
 import '../../domain/entities/document_firm_entity.dart';
 import '../blocs/all_data_bloc/all_data_bloc.dart';
 import 'tabs/pie_chart_tabs_widget.dart';
@@ -49,7 +49,7 @@ class FirmDocumentDetailPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(Firms.getWithId(d.idFirm).name),
+          title: Text(Firm.getWithId(d.idFirm).name),
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(
@@ -68,7 +68,7 @@ class FirmDocumentDetailPage extends StatelessWidget {
           children: <Widget>[
             DataTableTabWidget(d: d),
             PieChartTabWidget(doc: doc!),
-            Center(
+            const Center(
               child: Text("It's sunny here"),
             ),
           ],
@@ -304,19 +304,19 @@ class DataTableTabWidget extends StatelessWidget {
           Container(
               // width: 80,
               alignment: Alignment.topLeft,
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               // height: 40,
               child: const Text('Dodatno: ')),
           Container(
             // height: 100,
             width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: const EdgeInsets.symmetric(horizontal: 10),
             child: Text(
               d.dopuna ?? '-',
               maxLines: 5,
               softWrap: true,
               // overflow: TextOverflow.clip,
-              style: TextStyle(fontStyle: FontStyle.italic),
+              style: const TextStyle(fontStyle: FontStyle.italic),
             ),
             //   ),
             // ],

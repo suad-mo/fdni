@@ -1,4 +1,4 @@
-enum Firms {
+enum Firm {
   igman(id: 1, name: 'IGMAN d.d. Konjic', shortName: 'IGMAN'),
   ginex(id: 2, name: 'UNIS- GINEX d.d. Goražde', shortName: 'GINEX'),
   trz(id: 3, name: 'TRZ Hadžići d.d.', shortName: 'TRZ'),
@@ -20,7 +20,7 @@ enum Firms {
   nullFirm(id: -1, name: 'No name', shortName: 'No name'),
   ;
 
-  const Firms({
+  const Firm({
     required this.id,
     required this.name,
     required this.shortName,
@@ -29,8 +29,8 @@ enum Firms {
   final String name;
   final String shortName;
 
-  static Firms getWithId(int? id) => Firms.values.firstWhere(
+  static Firm getWithId(int? id) => Firm.values.firstWhere(
         (el) => el.id == id,
-        orElse: () => Firms.nullFirm,
+        orElse: () => Firm.nullFirm,
       );
 }

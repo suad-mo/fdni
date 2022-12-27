@@ -1,26 +1,26 @@
 import 'package:equatable/equatable.dart';
-import 'package:fdni/core/enums/firms.dart';
+import 'package:fdni/core/enums/firm.dart';
 
 class BarDataEntitey extends Equatable {
-  final Firms _firma;
+  final Firm _firma;
   final double _total;
   final double _nvo;
   final double _ta;
   final double _usluge;
 
   const BarDataEntitey({
-    required Firms? firma,
+    required Firm? firma,
     required double? nvo,
     required double? ta,
     required double? usluge,
     required double? total,
-  })  : _firma = firma ?? Firms.nullFirm,
+  })  : _firma = firma ?? Firm.nullFirm,
         _nvo = nvo ?? 0,
         _ta = ta ?? 0,
         _usluge = usluge ?? 0,
         _total = total ?? 0;
 
-  Firms get firma => _firma;
+  Firm get firma => _firma;
   double get nvo => _nvo;
   double get ta => _ta;
   double get usluge => _usluge;

@@ -1,4 +1,4 @@
-import 'package:fdni/core/enums/firms.dart';
+import 'package:fdni/core/enums/firm.dart';
 import 'package:fdni/feature/firm/domain/entities/document_firm_entity.dart';
 import 'package:fdni/feature/firm/domain/entities/document_entity.dart';
 import 'package:fdni/feature/firm/domain/entities/firm_entity.dart';
@@ -75,7 +75,7 @@ class DocumentRepositoryImpl implements DocumentRepository {
 
   @override
   Future<Either<Failure, List<FirmDataEntity>>> getFirmDocumentsByFirm(
-      Firms firm) async {
+      Firm firm) async {
     try {
       final documents = await _localDataSource.getFirmDocumentsByIdFirm(firm);
       //print(documents);
