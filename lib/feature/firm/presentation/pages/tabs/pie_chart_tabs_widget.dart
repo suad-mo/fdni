@@ -37,13 +37,13 @@ class PieChartTabWidget extends StatelessWidget {
           yValueMapper: (ChartData data, _) => data.y,
           dataLabelMapper: (ChartData data, _) {
             final y = data.y / d.ukupno!;
-            return s.format(y);
+            return '${s.format(y)}\n${data.x}';
           },
           dataLabelSettings: const DataLabelSettings(
             isVisible: true,
             // Avoid labels intersection
             labelIntersectAction: LabelIntersectAction.shift,
-            // labelPosition: ChartDataLabelPosition.outside,
+            labelPosition: ChartDataLabelPosition.inside,
             connectorLineSettings:
                 ConnectorLineSettings(type: ConnectorType.curve, length: '25%'),
             useSeriesColor: true,

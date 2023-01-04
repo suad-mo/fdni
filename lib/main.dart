@@ -45,9 +45,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   String _year = '2022';
-  int _period = 1;
+  int _period = 3;
 
-  String get idPeriod => '$_year-1-${_period.toString()}';
+  String get idPeriod => '$_year-1-$_period';
 
   @override
   Widget build(BuildContext context) {

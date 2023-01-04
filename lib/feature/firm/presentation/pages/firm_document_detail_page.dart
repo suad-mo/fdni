@@ -53,10 +53,10 @@ class FirmDocumentDetailPage extends StatelessWidget {
           bottom: const TabBar(
             tabs: <Widget>[
               Tab(
-                icon: Icon(Icons.cloud_outlined),
+                icon: Icon(Icons.notes),
               ),
               Tab(
-                icon: Icon(Icons.beach_access_sharp),
+                icon: Icon(Icons.pie_chart_sharp),
               ),
               Tab(
                 icon: Icon(Icons.brightness_5_sharp),
@@ -133,26 +133,54 @@ class DataTableTabWidget extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
+          const SizedBox(height: 10),
           Row(
             children: [
-              const SizedBox(
-                  width: 60,
-                  // alignment: Alignment.centerRight,
-                  child: Text('Broj:')),
-              Text(d.aktOznaka!),
+              Text(
+                Firm.getWithId(d.idFirm).name,
+                style: const TextStyle(fontSize: 20),
+              ),
             ],
           ),
-          Row(
-            children: [
-              const SizedBox(
-                  width: 60,
-                  // alignment: Alignment.centerRight,
-                  child: Text('Datum:')),
-              Text(da.format(d.aktDatum!)),
-            ],
+          const SizedBox(height: 10),
+          if (d.aktOznaka != null)
+            Row(
+              children: [
+                const SizedBox(
+                    width: 60,
+                    // alignment: Alignment.centerRight,
+                    child: Text('Broj:')),
+                Text(d.aktOznaka!),
+              ],
+            ),
+          const SizedBox(height: 10),
+          if (d.aktDatum != null)
+            Row(
+              children: [
+                const SizedBox(
+                    width: 60,
+                    // alignment: Alignment.centerRight,
+                    child: Text('Datum:')),
+                Text(da.format(d.aktDatum!)),
+              ],
+            ),
+          const SizedBox(height: 10),
+          Container(
+            alignment: Alignment.center,
+            child: Column(
+              children: [
+                const Text(
+                  'Izvještaj o proizvodnji NVO-a',
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text(
+                  '${d.idDocument.split('-')[2]}. kvartal ${d.idDocument.split('-')[0]} godine',
+                  style: const TextStyle(fontSize: 18),
+                ),
+              ],
+            ),
           ),
           DataTable(
-            // sortColumnIndex: 0,
             columns: const <DataColumn>[
               DataColumn(
                 label: Expanded(
@@ -288,39 +316,37 @@ class DataTableTabWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(
-            height: 20,
+            height: 10,
           ),
-          Row(
-            children: [
-              const SizedBox(
-                  // width: 60,
-                  // alignment: Alignment.centerRight,
-                  child: Text('Napomena: ')),
-              Text(d.napomena ?? '-'),
-            ],
-          ),
-          // Row(
-          //   children: [
-          Container(
-              // width: 80,
-              alignment: Alignment.topLeft,
-              margin: const EdgeInsets.all(10),
-              // height: 40,
-              child: const Text('Dodatno: ')),
-          Container(
-            // height: 100,
-            width: double.infinity,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              d.dopuna ?? '-',
-              maxLines: 5,
-              softWrap: true,
-              // overflow: TextOverflow.clip,
-              style: const TextStyle(fontStyle: FontStyle.italic),
+          if (d.napomena != null || d.dopuna != null)
+            Container(
+                alignment: Alignment.topLeft,
+                margin: const EdgeInsets.all(8),
+                child: const Text('Napomena:')),
+          if (d.napomena != null)
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                d.napomena ?? '-',
+                maxLines: 5,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontStyle: FontStyle.italic),
+              ),
             ),
-            //   ),
-            // ],
-          ),
+          if (d.dopuna != null)
+            Container(
+              width: double.infinity,
+              margin: const EdgeInsets.symmetric(horizontal: 8),
+              child: Text(
+                d.dopuna ?? '-ee',
+                maxLines: 5,
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                style: const TextStyle(fontStyle: FontStyle.italic),
+              ),
+            ),
         ],
       ),
     );
