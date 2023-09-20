@@ -112,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         DropdownButton<String>(
                           value: _year,
                           items: <String>[
+                            '2023',
                             '2022',
                             '2021',
                             '2020',
@@ -133,6 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             if (newValue != _year) {
                               setState(() {
                                 _year = newValue!;
+                                _period = 1;
                               });
                             }
                           },
@@ -182,7 +184,9 @@ class _MyHomePageState extends State<MyHomePage> {
                       ],
                     ),
                   ),
-                  DataTable(dividerThickness: 2, columnSpacing: 4,
+                  DataTable(
+                      dividerThickness: 2,
+                      columnSpacing: 4,
                       // Datatable widget that have the property columns and rows.
                       columns: const [
                         // Set the name of the column
@@ -195,66 +199,68 @@ class _MyHomePageState extends State<MyHomePage> {
                         DataColumn(
                           label: Text('Ukupno'),
                         ),
-                      ], rows: [
-                    // Set the values to the columns
+                      ],
+                      rows: [
+                        // Set the values to the columns
 
-                    ...data.map(
-                      (e) {
-                        // MaterialStatePropertyColor color = Colors.white;
-                        var name = e.idFirm.toString();
-                        if (firms.isNotEmpty) {
-                          name = firms
-                              .firstWhere((firm) => e.idFirm == firm.idFirm)
-                              .name;
-                        }
+                        ...data.map(
+                          (e) {
+                            // MaterialStatePropertyColor color = Colors.white;
+                            var name = e.idFirm.toString();
+                            if (firms.isNotEmpty) {
+                              name = firms
+                                  .firstWhere((firm) => e.idFirm == firm.idFirm)
+                                  .name;
+                            }
 
-                        return DataRow(cells: [
-                          DataCell(SizedBox(
-                            // width: MediaQuery.of(context).size.width / 3 - 20,
+                            return DataRow(cells: [
+                              DataCell(SizedBox(
+                                // width: MediaQuery.of(context).size.width / 3 - 20,
 
-                            child: Text(
-                              name,
-                              maxLines: 2,
-                              // softWrap: false,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            // ),
-                          )),
-                          DataCell(
-                            Container(
+                                child: Text(
+                                  name,
+                                  maxLines: 2,
+                                  // softWrap: false,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                // ),
+                              )),
+                              DataCell(
+                                Container(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                        s.format(e.ukupno! / state.totalA))),
+                              ),
+                              DataCell(Container(
                                 alignment: Alignment.centerRight,
-                                child:
-                                    Text(s.format(e.ukupno! / state.totalA))),
+                                child: Text(
+                                  f.format(e.ukupno),
+                                  textAlign: TextAlign.right,
+                                ),
+                              )),
+                            ]);
+                          },
+                        ).toList(),
+                        DataRow(cells: [
+                          DataCell(
+                            Container(),
                           ),
                           DataCell(Container(
                             alignment: Alignment.centerRight,
-                            child: Text(
-                              f.format(e.ukupno),
-                              textAlign: TextAlign.right,
+                            child: const Text(
+                              'Total: ',
+                              style: TextStyle(fontWeight: FontWeight.bold),
                             ),
                           )),
-                        ]);
-                      },
-                    ).toList(),
-                    DataRow(cells: [
-                      DataCell(
-                        Container(),
-                      ),
-                      DataCell(Container(
-                        alignment: Alignment.centerRight,
-                        child: const Text(
-                          'Total: ',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      )),
-                      DataCell(Container(
-                          alignment: Alignment.centerRight,
-                          child: Text(
-                            f.format(state.totalA),
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ))),
-                    ]),
-                  ]),
+                          DataCell(Container(
+                              alignment: Alignment.centerRight,
+                              child: Text(
+                                f.format(state.totalA),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              ))),
+                        ]),
+                      ]),
                 ],
               ),
             ),
