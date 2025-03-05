@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter FDNI',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -112,6 +113,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         DropdownButton<String>(
                           value: _year,
                           items: <String>[
+                            '2024',
                             '2023',
                             '2022',
                             '2021',

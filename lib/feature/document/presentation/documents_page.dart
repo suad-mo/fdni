@@ -15,9 +15,20 @@ class DocumentsPage extends StatefulWidget {
 }
 
 class _DocumentsPageState extends State<DocumentsPage> {
-  final years = <int>[2022, 2021, 2020, 2016, 2015, 2014, 2013, 2012];
+  final years = <int>[
+    2024,
+    2023,
+    2022,
+    2021,
+    2020,
+    2016,
+    2015,
+    2014,
+    2013,
+    2012
+  ];
   late AllDataBloc bloc;
-  int currentYear = 2022;
+  int currentYear = 2024;
   DocumentType currentType = DocumentType.plan;
   DocumentSubType currentSubType = DocumentSubType.quarter3;
   Map<int, Map<DocumentType, List<DocumentSubType>>> list = {};

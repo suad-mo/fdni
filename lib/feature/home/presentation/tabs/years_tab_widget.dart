@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class YearsTabWidget extends StatelessWidget {
   static const List<int> years = <int>[
+    2024,
     2023,
     2022,
     2021,

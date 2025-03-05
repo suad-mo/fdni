@@ -17,6 +17,11 @@ enum Firm {
   bntHolding(
       id: 15, name: 'BNT Holding d.d. Novi Travnik', shortName: 'BNTHolding'),
   danialS(id: 16, name: 'DANIAL S d.o.o. Tešanj', shortName: 'DANIAL-S'),
+  stancerajNew(
+      id: 17,
+      name: 'Štanceraj New Company d.o.o. Konjic',
+      shortName: 'STANCERAJ'),
+  zupcanik(id: 18, name: 'Zupčanik d.o.o. Tešanj', shortName: 'ZUPCANIK'),
   nullFirm(id: -1, name: 'No name', shortName: 'No name'),
   ;
 
